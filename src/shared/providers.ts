@@ -70,6 +70,7 @@ export const EngineId = {
   Ollama: "ollama",
   OpenCode: "opencode",
   OpenRouter: "openrouter",
+  Opper: "opper",
   LocalServer: "local-server",
   Grok: "grok",
   Cursor: "cursor",
@@ -210,6 +211,17 @@ export const PROVIDERS = [
     roles: "sessions",
     billing: "metered",
     signIn: null,
+  },
+  {
+    // Opper: built as OpenRouter is, a key pasted in Settings. Beta until a live test proves it.
+    id: EngineId.Opper,
+    label: "Opper",
+    subscription: false,
+    login: "none",
+    roles: "sessions",
+    billing: "metered",
+    signIn: null,
+    beta: true,
   },
   {
     id: EngineId.LocalServer,

@@ -262,6 +262,7 @@ export default {
   "Add to": "추가할 곳",
   "Add your OpenRouter API key in Settings › Model Providers.":
     "설정 › 모델 제공자에서 OpenRouter API 키를 추가하세요.",
+  "Add your Opper API key in Settings › Model Providers.": "설정 › 모델 제공자에서 Opper API 키를 추가하세요.",
   "Add {title} to this game": "이 게임에 {title} 추가",
   Added: "추가됨",
   "Added a {shape}": "{shape} 추가했어요",
@@ -468,6 +469,7 @@ export default {
   "Billed to your OpenRouter credits.": "OpenRouter 크레딧에서 차감돼요.",
   "Billed to your OpenRouter credits. Pick any of its models in the model menu.":
     "OpenRouter 크레딧에서 차감돼요. 모델 메뉴에서 원하는 모델을 고르세요.",
+  "Billed to your Opper credits": "Opper 크레딧에서 차감",
   "Black point": "블랙 포인트",
   Blades: "블레이드",
   "Blender assets": "Blender 에셋",
@@ -2237,6 +2239,7 @@ export default {
   "No Godot project in this game's folder yet.": "이 게임 폴더에는 아직 Godot 프로젝트가 없어요.",
   "No MCP servers match your search.": "검색과 일치하는 MCP 서버가 없어요.",
   "No OpenRouter API key is saved.": "저장된 OpenRouter API 키가 없어요.",
+  "No Opper API key is saved.": "저장된 Opper API 키가 없어요.",
   "No [mcp_servers.<name>] sections found in that snippet.": "그 스니펫에서 [mcp_servers.<name>] 섹션을 찾지 못했어요.",
   "No active sign-in link. Start sign-in again.": "활성 로그인 링크가 없어요. 로그인을 다시 시작해 주세요.",
   "No app on this Mac opens {file}, so it’s shown in Finder.":
@@ -2587,6 +2590,16 @@ export default {
   "Opens the folder": "폴더를 열어요",
   "Opens the release page": "릴리스 페이지가 열려요",
   "Opens your browser. You’ll come back here to pay.": "브라우저가 열려요. 결제하려면 다시 여기로 돌아오세요.",
+  "Opper API key": "Opper API 키",
+  "Opper API key saved": "Opper API 키를 저장했어요",
+  "Opper could not be reached ({detail}).": "Opper에 연결할 수 없어요({detail}).",
+  "Opper did not accept the saved API key.": "Opper가 저장된 API 키를 받아들이지 않았어요.",
+  "Opper didn't accept that key. Check it and paste it again.":
+    "Opper가 이 키를 받지 않았어요. 확인하고 다시 붙여넣어 주세요.",
+  "Opper is unavailable": "Opper를 사용할 수 없어요",
+  "Opper's model list could not be read.": "Opper 모델 목록을 읽을 수 없어요.",
+  "Opper's model list failed (HTTP {status}).": "Opper 모델 목록을 가져오지 못했어요(HTTP {status}).",
+  "Opper's model list was larger than expected.": "Opper 모델 목록이 예상보다 컸어요.",
   Optic: "옵틱",
   "Or in Studio: {clicks}.": "또는 Studio에서: {clicks}.",
   "Otherwise every game can use it.": "아니면 모든 게임에서 쓸 수 있어요.",
@@ -2613,6 +2626,8 @@ export default {
   "Paste a server configuration": "서버 설정 붙여 넣기",
   "Paste an API key. Requests are billed to your OpenRouter credits.":
     "API 키를 붙여 넣으세요. 요청 비용은 OpenRouter 크레딧에서 차감돼요.",
+  "Paste an API key. Requests are billed to your Opper credits.":
+    "API 키를 붙여 넣으세요. 요청 비용은 Opper 크레딧에서 차감돼요.",
   "Paste and Match Style": "붙여넣기 및 스타일 일치",
   "Paste the JSON, command or URL from the server's install page to fill this in.":
     "서버 설치 페이지의 JSON, 명령어 또는 URL을 붙여 넣으면 여기가 채워져요.",
@@ -3571,6 +3586,8 @@ export default {
   "That didn't work, and nothing was changed.": "잘 안 됐고, 아무것도 바뀌지 않았어요.",
   "That does not look like an OpenRouter API key. Paste the whole key, with no spaces.":
     "OpenRouter API 키가 아닌 것 같아요. 공백 없이 키 전체를 붙여 넣으세요.",
+  "That does not look like an Opper API key. Paste the whole key, with no spaces.":
+    "Opper API 키가 아닌 것 같아요. 공백 없이 키 전체를 붙여 넣으세요.",
   "That doesn't look like a key. Paste the whole key, with no spaces.":
     "키 형식이 아닌 것 같아요. 공백 없이 키 전체를 붙여 넣으세요.",
   "That doesn't look like the code from the sign-in page. Copy it again.":
@@ -3628,6 +3645,8 @@ export default {
   "The Loop's work is kept in your project.": "Loop의 작업은 프로젝트에 남아 있어요.",
   "The OS secret store is locked, so the OpenRouter key cannot be read. {detail}":
     "OS 비밀 저장소가 잠겨 있어서 OpenRouter 키를 읽을 수 없어요. {detail}",
+  "The OS secret store is locked, so the Opper key cannot be read. {detail}":
+    "OS 비밀 저장소가 잠겨 있어서 Opper 키를 읽을 수 없어요. {detail}",
   "The OS secret store is locked, so the server's API key cannot be read. {detail}":
     "OS 비밀 저장소가 잠겨 있어서 서버의 API 키를 읽을 수 없어요. {detail}",
   "The Ollama library answered {status}.": "Ollama 라이브러리가 {status} 상태로 응답했어요.",

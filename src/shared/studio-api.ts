@@ -509,6 +509,13 @@ export interface StudioApi {
   /** Stop the waiting sign-in; false when none is waiting. */
   openRouterSignInCancel(): Promise<boolean>;
   /**
+   * Check a pasted Opper API key with Opper and keep it in the OS secret store when it is accepted.
+   * The answer is Opper's status; the key never comes back.
+   */
+  opperKeySave(key: string): Promise<import("./engine-descriptor.ts").EngineStatus>;
+  /** Forget the saved Opper key. */
+  opperKeyClear(): Promise<import("./engine-descriptor.ts").EngineStatus>;
+  /**
    * Connect a model server the person runs (`shared/local-server.ts`): check the address is on this
    * computer or the local network, ask the server for its models with the key when one is given,
    * and save both only when it answers. The key never comes back.

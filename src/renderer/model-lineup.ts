@@ -4,7 +4,7 @@
  * provider id (Claude's resolved model, Codex's slug), never from its display name, so a new
  * release replaces the one before it without a table to keep. An id that cannot be read stays
  * in the picker: a model named some new way must never vanish. A catalog of hundreds (OpenRouter,
- * OpenCode) starts instead with its first few: the newest GPT and Claude it lists, a vendor at a
+ * Opper, OpenCode) starts instead with its first few: the newest GPT and Claude it lists, a vendor at a
  * time, then the rest in the order the provider lists them, its free models only when it lists
  * nothing else. Settings choices (`state/model-picker.ts`) override the rule per model; the
  * provider's default always shows.
@@ -33,6 +33,7 @@ const DEFAULT_MODEL = "default";
 /** Catalogs too long to list whole, and how many of their first models the picker lists. */
 const FIRST_FEW: Partial<Record<string, number>> = {
   [EngineId.OpenRouter]: 3,
+  [EngineId.Opper]: 3,
   [EngineId.OpenCode]: 3,
   [EngineId.Cursor]: 3,
 };

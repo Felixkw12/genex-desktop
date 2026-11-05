@@ -28,6 +28,7 @@ const REFRESHABLE: ReadonlySet<string> = new Set([
   EngineId.Grok,
   EngineId.Cursor,
   EngineId.OpenRouter,
+  EngineId.Opper,
   EngineId.LocalServer,
 ]);
 /** The engines with no subscription sign-in: a recheck reads their models (and status) again. */
@@ -36,10 +37,11 @@ const RECHECKED_BY_MODELS: readonly string[] = [
   EngineId.Grok,
   EngineId.Cursor,
   EngineId.OpenRouter,
+  EngineId.Opper,
   EngineId.LocalServer,
 ];
 
-/** An engine whose API key is pasted in Settings (OpenRouter). */
+/** An engine whose API key is pasted in Settings (OpenRouter, Opper). */
 interface ApiKeyEngine {
   saveKey(value: unknown): Promise<EngineStatus>;
   clearKey(): Promise<EngineStatus>;
@@ -62,6 +64,7 @@ function pullProblem(err: unknown): ModelPullProblem {
 const MESSAGE = {
   unknownProvider: "Unknown coding provider",
   noKeyEngine: () => t("OpenRouter is unavailable"),
+  noOpper: () => t("Opper is unavailable"),
   noLocalServer: () => t("Local servers are unavailable"),
   bonsaiUnavailable: () => t("Bonsai runtime is unavailable"),
   noModel: "Name the model",
@@ -203,8 +206,9 @@ function registerLocalModelIpc(
 }
 
 /**
- * The OpenRouter key, pasted or got by the browser sign-in, and the TypeSafe key pilots' fast
- * decisions use: each checked with its service, kept in the OS secret store, never sent back.
+ * The OpenRouter key, pasted or got by the browser sign-in, Opper's pasted key, and the TypeSafe key
+ * pilots' fast decisions use: each checked with its service, kept in the OS secret store, never sent
+ * back.
  */
 function registerApiKeyIpc(
   handle: IpcHandle,
@@ -236,6 +240,30 @@ function registerApiKeyIpc(
   });
   handle("studio:openrouter.signin.reopen", async () => openRouterLogin.reopen());
   handle("studio:openrouter.signin.cancel", async () => openRouterLogin.cancel());
+  registerOpperKeyIpc(handle, { core, pushUiEvent });
+}
+
+/** Opper's key, pasted in Settings: checked with Opper, kept in the OS secret store, never sent back. */
+function registerOpperKeyIpc(
+  handle: IpcHandle,
+  { core, pushUiEvent }: Pick<ModelsIpcDeps, "core" | "pushUiEvent">,
+): void {
+  const opper = (): ApiKeyEngine => {
+    const engine = core.engines.has(EngineId.Opper) ? core.engines.get(EngineId.Opper) : null;
+    if (!isApiKeyEngine(engine)) throw new Error(MESSAGE.noOpper());
+    return engine;
+  };
+  const changed = (): void => pushUiEvent({ type: UiEvent.EnginesChanged, payload: { engine: EngineId.Opper } });
+  handle("studio:opper.key.save", async (payload) => {
+    const status = await opper().saveKey(payload?.key);
+    changed();
+    return status;
+  });
+  handle("studio:opper.key.clear", async () => {
+    const status = await opper().clearKey();
+    changed();
+    return status;
+  });
 }
 
 /**

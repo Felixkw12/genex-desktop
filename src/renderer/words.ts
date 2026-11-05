@@ -2750,7 +2750,7 @@ export const PROVIDER_ACCOUNT_WORDS = {
   modelProviders: t("Model providers"),
 } as const;
 
-/** Settings → Model Providers: the metered rows, OpenCode and OpenRouter (`panels/MeteredProviders.tsx`). */
+/** Settings → Model Providers: the metered rows, OpenCode, OpenRouter and Opper (`panels/MeteredProviders.tsx`). */
 export const METERED_PROVIDER_WORDS = {
   connected: t("Connected"),
   notConnected: t("Not connected"),
@@ -2798,6 +2798,21 @@ export const METERED_PROVIDER_WORDS = {
     notConnectedLine: t("Paste an API key. Requests are billed to your OpenRouter credits."),
     connectedLine: t("Billed to your OpenRouter credits"),
     refused: t("OpenRouter didn't accept that key. Check it and paste it again."),
+    replace: t("Replace key…"),
+    replaceLine: t("The new key is checked before it's saved"),
+    remove: t("Remove key"),
+    cancel: t("Cancel"),
+  },
+  opper: {
+    name: "Opper",
+    keysUrl: "https://platform.opper.ai",
+    keyLabel: t("Opper API key"),
+    keyPlaceholder: t("API key"),
+    save: t("Save key"),
+    getKey: t("Get a key"),
+    notConnectedLine: t("Paste an API key. Requests are billed to your Opper credits."),
+    connectedLine: t("Billed to your Opper credits"),
+    refused: t("Opper didn't accept that key. Check it and paste it again."),
     replace: t("Replace key…"),
     replaceLine: t("The new key is checked before it's saved"),
     remove: t("Remove key"),

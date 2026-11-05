@@ -265,6 +265,8 @@ export default {
   "Add to": "追加先",
   "Add your OpenRouter API key in Settings › Model Providers.":
     "設定 › モデルプロバイダーでOpenRouterのAPIキーを追加してください。",
+  "Add your Opper API key in Settings › Model Providers.":
+    "設定 › モデルプロバイダーでOpperのAPIキーを追加してください。",
   "Add {title} to this game": "{title}をこのゲームに追加",
   Added: "追加済み",
   "Added a {shape}": "{shape}を追加しました",
@@ -472,6 +474,7 @@ export default {
   "Billed to your OpenRouter credits.": "OpenRouterのクレジットから支払われます。",
   "Billed to your OpenRouter credits. Pick any of its models in the model menu.":
     "OpenRouterのクレジットから支払われます。モデルメニューから好きなモデルを選べます。",
+  "Billed to your Opper credits": "Opperのクレジットから支払い",
   "Black point": "ブラックポイント",
   Blades: "ブレード",
   "Blender assets": "Blenderアセット",
@@ -2291,6 +2294,7 @@ export default {
   "No Godot project in this game's folder yet.": "このゲームのフォルダーには、まだGodotプロジェクトがありません。",
   "No MCP servers match your search.": "検索に一致するMCPサーバーはありません。",
   "No OpenRouter API key is saved.": "OpenRouterのAPIキーが保存されていません。",
+  "No Opper API key is saved.": "OpperのAPIキーが保存されていません。",
   "No [mcp_servers.<name>] sections found in that snippet.":
     "そのスニペットに[mcp_servers.<name>]セクションが見つかりません。",
   "No active sign-in link. Start sign-in again.":
@@ -2654,6 +2658,16 @@ export default {
   "Opens the folder": "フォルダーを開きます",
   "Opens the release page": "リリースページを開きます",
   "Opens your browser. You’ll come back here to pay.": "ブラウザが開きます。支払いはここに戻ってから行います。",
+  "Opper API key": "OpperのAPIキー",
+  "Opper API key saved": "OpperのAPIキーを保存しました",
+  "Opper could not be reached ({detail}).": "Opperに接続できませんでした（{detail}）。",
+  "Opper did not accept the saved API key.": "Opperが保存済みのAPIキーを受け付けませんでした。",
+  "Opper didn't accept that key. Check it and paste it again.":
+    "Opperがこのキーを受け付けませんでした。確認して、もう一度貼り付けてください。",
+  "Opper is unavailable": "Opperを利用できません",
+  "Opper's model list could not be read.": "Opperのモデル一覧を読み取れませんでした。",
+  "Opper's model list failed (HTTP {status}).": "Opperのモデル一覧の取得に失敗しました（HTTP {status}）。",
+  "Opper's model list was larger than expected.": "Opperのモデル一覧が想定より大きすぎました。",
   Optic: "オプティック",
   "Or in Studio: {clicks}.": "またはStudioで：{clicks}。",
   "Otherwise every game can use it.": "オフのときは、どのゲームでも使えます。",
@@ -2681,6 +2695,8 @@ export default {
   "Paste a server configuration": "サーバー設定を貼り付け",
   "Paste an API key. Requests are billed to your OpenRouter credits.":
     "APIキーを貼り付けてください。リクエストはOpenRouterのクレジットから支払われます。",
+  "Paste an API key. Requests are billed to your Opper credits.":
+    "APIキーを貼り付けてください。リクエストはOpperのクレジットから支払われます。",
   "Paste and Match Style": "ペーストしてスタイルを合わせる",
   "Paste the JSON, command or URL from the server's install page to fill this in.":
     "サーバーのインストールページにあるJSON、コマンド、URLを貼り付けると、ここが自動で入力されます。",
@@ -3657,6 +3673,8 @@ export default {
   "That didn't work, and nothing was changed.": "うまくいきませんでした。何も変更されていません。",
   "That does not look like an OpenRouter API key. Paste the whole key, with no spaces.":
     "OpenRouterのAPIキーではないようです。キー全体をスペースなしで貼り付けてください。",
+  "That does not look like an Opper API key. Paste the whole key, with no spaces.":
+    "OpperのAPIキーではないようです。キー全体をスペースなしで貼り付けてください。",
   "That doesn't look like a key. Paste the whole key, with no spaces.":
     "キーの形式ではないようです。スペースを入れずに、キー全体を貼り付けてください。",
   "That doesn't look like the code from the sign-in page. Copy it again.":
@@ -3717,6 +3735,8 @@ export default {
   "The Loop's work is kept in your project.": "Loopの作業はプロジェクトに残っています。",
   "The OS secret store is locked, so the OpenRouter key cannot be read. {detail}":
     "OSのシークレットストアがロックされているため、OpenRouterのキーを読み取れません。{detail}",
+  "The OS secret store is locked, so the Opper key cannot be read. {detail}":
+    "OSのシークレットストアがロックされているため、Opperのキーを読み取れません。{detail}",
   "The OS secret store is locked, so the server's API key cannot be read. {detail}":
     "OSのシークレットストアがロックされているため、サーバーのAPIキーを読み取れません。{detail}",
   "The Ollama library answered {status}.": "Ollamaライブラリが{status}を返しました。",

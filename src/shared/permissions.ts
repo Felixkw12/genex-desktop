@@ -82,8 +82,8 @@ interface EnginePermissions {
  * which asks before each edit or command; its commands always run in the studio's sandbox, so it
  * has no Bypass. Codex has no Manual or Accept edits: Auto keeps its sandbox (on its app server, what
  * the sandbox would not run is asked about and settled by the Auto check), Plan only reads, Bypass
- * drops its sandbox. OpenRouter's and a local server's tools run in the studio's own session
- * loop, as Bonsai's do.
+ * drops its sandbox. OpenRouter's, Opper's and a local server's tools run in the studio's own
+ * session loop, as Bonsai's do.
  * OpenCode (`opencode run`), Grok Build (`grok -p`) and Cursor (`cursor-agent --print`) cannot ask
  * mid-turn: Auto runs them in the studio's sandbox, Plan reads only, and Grok Build's Bypass runs it
  * as the person outside that sandbox, as Codex's does. Any other engine (Ollama, whose tools run in the harness, or one added later) keeps its
@@ -101,6 +101,10 @@ const ENGINE_PERMISSIONS: Readonly<Record<string, EnginePermissions>> = {
     withheld: UnavailableModeReason.CannotAsk,
   },
   [EngineId.OpenRouter]: {
+    modes: [PermissionMode.Auto, PermissionMode.Manual, PermissionMode.AcceptEdits, PermissionMode.Plan],
+    withheld: UnavailableModeReason.AlwaysSandboxed,
+  },
+  [EngineId.Opper]: {
     modes: [PermissionMode.Auto, PermissionMode.Manual, PermissionMode.AcceptEdits, PermissionMode.Plan],
     withheld: UnavailableModeReason.AlwaysSandboxed,
   },

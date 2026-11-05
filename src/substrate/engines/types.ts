@@ -29,9 +29,9 @@ export type { EngineAccount, EngineStatus, EngineStatusCode } from "../../shared
  *    with its own subscription login (D8 — we never see or store a token), and each translates
  *    its own event stream into the one vocabulary the studio's log speaks.
  *
- * The API keys the studio holds are OpenRouter's and a local server's (`local-server.ts`), direct
- * engines on the same pi-ai path as Ollama's: each key is pasted in Settings, kept in the OS secret
- * store, and never leaves main.
+ * The API keys the studio holds are OpenRouter's, Opper's (`opper.ts`) and a local server's
+ * (`local-server.ts`), direct engines on the same pi-ai path as Ollama's: each key is pasted in
+ * Settings, kept in the OS secret store, and never leaves main.
  * OpenCode is a third delegated harness, which keeps its own sign-ins in its own store.
  */
 import type { Message } from "../types.ts";

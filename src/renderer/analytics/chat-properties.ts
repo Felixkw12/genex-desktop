@@ -62,7 +62,12 @@ type Props<E extends ChatEvent> = ChatEventProperties[E];
 
 const ENGINE_IDS: ReadonlySet<string> = new Set(Object.values(EngineId));
 /** Engines whose models come from a fixed catalog, never a name the person typed. */
-const CATALOG_ENGINES: ReadonlySet<string> = new Set([EngineId.ClaudeCode, EngineId.Codex, EngineId.OpenRouter]);
+const CATALOG_ENGINES: ReadonlySet<string> = new Set([
+  EngineId.ClaudeCode,
+  EngineId.Codex,
+  EngineId.OpenRouter,
+  EngineId.Opper,
+]);
 /** A catalog model id's shape (`claude-opus-4-1`, `gpt-5-codex`, `vendor/model:free`). */
 const CATALOG_MODEL_ID = /^[a-z0-9][a-z0-9._:/-]{0,95}$/i;
 const EFFORTS: ReadonlySet<string> = new Set(Object.values(ReasoningEffort));
@@ -75,7 +80,7 @@ export function engineRef(id: string | null | undefined): string {
   return ENGINE_IDS.has(id) ? id : EngineRefOther.Other;
 }
 
-/** A model key as analytics names it: a subscription's or OpenRouter's catalog id, else `custom`. */
+/** A model key as analytics names it: a subscription's, OpenRouter's or Opper's catalog id, else `custom`. */
 export function modelRef(key: string | null | undefined): string {
   if (!key) return ModelRefOther.None;
   const { engine, model } = parseModelKey(key);

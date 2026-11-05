@@ -13,6 +13,7 @@ const STUDIO_COMPACTED_ENGINES: readonly string[] = [
   EngineId.Bonsai,
   EngineId.Ollama,
   EngineId.OpenRouter,
+  EngineId.Opper,
   EngineId.LocalServer,
 ];
 /** Where the studio compacts a local engine's context when no threshold is set. */

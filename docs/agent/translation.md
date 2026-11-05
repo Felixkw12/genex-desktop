@@ -52,7 +52,7 @@ must stay short. Read the code around each message to know where it shows. Keep 
 `#`, `{n, plural, …}` structure and the names below exactly. Give every plural category your
 language has (CLDR): Russian `one`, `few`, `many`, `other`; Japanese, Korean and Chinese `other`.
 
-Never translated: Genex, Claude Code, Codex, OpenCode, OpenRouter, Grok, Grok Build, xAI, Cursor, Unity, Unreal, Godot, Roblox,
+Never translated: Genex, Claude Code, Codex, OpenCode, OpenRouter, Opper, Grok, Grok Build, xAI, Cursor, Unity, Unreal, Godot, Roblox,
 Blender, Meshy, Tripo, Uthana, Pro, Loop, Auto (the mode), Harness, Studio, model names, file
 names, keys (⌘, Ctrl), URLs.
 

@@ -316,6 +316,8 @@ export default {
   "Add to": "Ajouter à",
   "Add your OpenRouter API key in Settings › Model Providers.":
     "Ajoute ta clé API OpenRouter dans Réglages › Fournisseurs de modèles.",
+  "Add your Opper API key in Settings › Model Providers.":
+    "Ajoute ta clé API Opper dans Réglages › Fournisseurs de modèles.",
   "Add {title} to this game": "Ajouter {title} à ce jeu",
   Added: "Ajouté",
   "Added a {shape}": "Ajouté : {shape}",
@@ -524,6 +526,7 @@ export default {
   "Billed to your OpenRouter credits.": "Facturé sur tes crédits OpenRouter.",
   "Billed to your OpenRouter credits. Pick any of its models in the model menu.":
     "Facturé sur tes crédits OpenRouter. Choisis n’importe lequel de ses modèles dans le menu des modèles.",
+  "Billed to your Opper credits": "Facturé sur tes crédits Opper",
   "Black point": "Point noir",
   Blades: "Lames",
   "Blender assets": "Ressources Blender",
@@ -2347,6 +2350,7 @@ export default {
   "No Godot project in this game's folder yet.": "Pas encore de projet Godot dans le dossier de ce jeu.",
   "No MCP servers match your search.": "Aucun serveur MCP ne correspond à ta recherche.",
   "No OpenRouter API key is saved.": "Aucune clé API OpenRouter n’est enregistrée.",
+  "No Opper API key is saved.": "Aucune clé API Opper n’est enregistrée.",
   "No [mcp_servers.<name>] sections found in that snippet.":
     "Aucune section [mcp_servers.<name>] trouvée dans cet extrait.",
   "No active sign-in link. Start sign-in again.": "Aucun lien de connexion actif. Relance la connexion.",
@@ -2712,6 +2716,16 @@ export default {
   "Opens the folder": "Ouvre le dossier",
   "Opens the release page": "Ouvre la page de la version",
   "Opens your browser. You’ll come back here to pay.": "Ouvre ton navigateur. Tu reviendras ici pour payer.",
+  "Opper API key": "Clé API Opper",
+  "Opper API key saved": "Clé API Opper enregistrée",
+  "Opper could not be reached ({detail}).": "Impossible de joindre Opper ({detail}).",
+  "Opper did not accept the saved API key.": "Opper n’a pas accepté la clé API enregistrée.",
+  "Opper didn't accept that key. Check it and paste it again.":
+    "Opper n’a pas accepté cette clé. Vérifie-la et colle-la à nouveau.",
+  "Opper is unavailable": "Opper est indisponible",
+  "Opper's model list could not be read.": "Impossible de lire la liste des modèles d’Opper.",
+  "Opper's model list failed (HTTP {status}).": "Échec de la liste des modèles d’Opper (HTTP {status}).",
+  "Opper's model list was larger than expected.": "La liste des modèles d’Opper était plus grande que prévu.",
   Optic: "Optique",
   "Or in Studio: {clicks}.": "Ou dans Studio : {clicks}.",
   "Otherwise every game can use it.": "Sinon, tous les jeux peuvent l’utiliser.",
@@ -2738,6 +2752,8 @@ export default {
   "Paste a server configuration": "Coller une configuration de serveur",
   "Paste an API key. Requests are billed to your OpenRouter credits.":
     "Colle une clé API. Les requêtes sont facturées sur tes crédits OpenRouter.",
+  "Paste an API key. Requests are billed to your Opper credits.":
+    "Colle une clé API. Les requêtes sont facturées sur tes crédits Opper.",
   "Paste and Match Style": "Coller et adapter le style",
   "Paste the JSON, command or URL from the server's install page to fill this in.":
     "Colle le JSON, la commande ou l’URL de la page d’installation du serveur pour remplir ceci.",
@@ -3719,6 +3735,8 @@ export default {
   "That didn't work, and nothing was changed.": "Ça n’a pas marché, et rien n’a été changé.",
   "That does not look like an OpenRouter API key. Paste the whole key, with no spaces.":
     "Ça ne ressemble pas à une clé API OpenRouter. Colle la clé entière, sans espaces.",
+  "That does not look like an Opper API key. Paste the whole key, with no spaces.":
+    "Ça ne ressemble pas à une clé API Opper. Colle la clé entière, sans espaces.",
   "That doesn't look like a key. Paste the whole key, with no spaces.":
     "Ça ne ressemble pas à une clé. Colle la clé en entier, sans espaces.",
   "That doesn't look like the code from the sign-in page. Copy it again.":
@@ -3777,6 +3795,8 @@ export default {
   "The Loop's work is kept in your project.": "Le travail du Loop est gardé dans ton projet.",
   "The OS secret store is locked, so the OpenRouter key cannot be read. {detail}":
     "Le stockage des secrets du système est verrouillé, donc la clé OpenRouter est illisible. {detail}",
+  "The OS secret store is locked, so the Opper key cannot be read. {detail}":
+    "Le stockage des secrets du système est verrouillé, donc la clé Opper est illisible. {detail}",
   "The OS secret store is locked, so the server's API key cannot be read. {detail}":
     "Le stockage des secrets du système est verrouillé, la clé API du serveur ne peut donc pas être lue. {detail}",
   "The Ollama library answered {status}.": "La bibliothèque Ollama a répondu {status}.",

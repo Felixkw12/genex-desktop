@@ -109,11 +109,13 @@ import { GrokEngine } from "../substrate/engines/grok.ts";
 import { cursorHomes, grokHome } from "../substrate/credential-homes.ts";
 import { LOCK_RECOVERY_DIR } from "../substrate/engines/ownership-locks.ts";
 import { OpenRouterEngine } from "../substrate/engines/openrouter.ts";
+import { OpperEngine } from "../substrate/engines/opper.ts";
 import { LocalServerEngine } from "../substrate/engines/local-server.ts";
 import { serverSettings } from "../substrate/local-server/settings.ts";
 import {
   LOCAL_SERVER_KEY_SECRET,
   OPENROUTER_KEY_SECRET,
+  OPPER_KEY_SECRET,
   secretKeyStore,
   TYPESAFE_KEY_SECRET,
 } from "../substrate/provider-keys.ts";
@@ -1507,6 +1509,7 @@ export class StudioCore {
       EngineId.Cursor,
       EngineId.Genex,
       EngineId.OpenRouter,
+      EngineId.Opper,
     ]);
   }
 
@@ -1588,6 +1591,15 @@ export class StudioCore {
         toolPath: async () => (await this.sandbox.toolPath()) ?? process.env.PATH ?? "",
         keys: secretKeyStore(path.join(this.layout.secrets, "providers"), OPENROUTER_KEY_SECRET),
         onModelsChanged: () => this.emit(UiEvent.EnginesChanged, { engine: EngineId.OpenRouter }),
+      }),
+      // Opper on the key pasted in Settings, built as OpenRouter is.
+      new OpperEngine({
+        root: path.join(this.layout.engineHomes, EngineId.Opper),
+        scratchRoot: path.join(this.layout.scratch, EngineId.Opper),
+        protectedPaths: this.#protectedPaths(),
+        toolPath: async () => (await this.sandbox.toolPath()) ?? process.env.PATH ?? "",
+        keys: secretKeyStore(path.join(this.layout.secrets, "providers"), OPPER_KEY_SECRET),
+        onModelsChanged: () => this.emit(UiEvent.EnginesChanged, { engine: EngineId.Opper }),
       }),
     ];
   }

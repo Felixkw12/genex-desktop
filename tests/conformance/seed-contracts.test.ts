@@ -330,7 +330,7 @@ describe("model roles (shared/model-roles.ts ↔ loop/model-roles.ts)", () => {
     assert.deepEqual(roles.ENGINE_LABELS, seedRoles.ENGINE_LABELS);
   });
 
-  const engines = ["claude-code", "codex", "bonsai", "ollama", "opencode", "openrouter", undefined];
+  const engines = ["claude-code", "codex", "bonsai", "ollama", "opencode", "openrouter", "opper", undefined];
   const models = [undefined, "default", roles.FABLE, roles.OPUS, "sonnet", roles.SOL, "gpt-5.9-new", "qwen3:8b"];
 
   it("resolves every preset and names every model the same way", () => {

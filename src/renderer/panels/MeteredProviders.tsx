@@ -1,10 +1,10 @@
 /**
  * Settings → Model Providers, the metered rows: OpenCode, which signs in to providers itself in
  * Studio's terminal, Grok Build and Cursor, which sign in to the person's account there the same way,
- * and OpenRouter, whose API key is pasted here. Each row keeps the shape of a
+ * and OpenRouter and Opper, whose API keys are pasted here. Each row keeps the shape of a
  * subscription's (`ModelsSection.tsx`): one status plate, one line, at most one visible action, an
- * Account menu once connected, and the picker's model list under it. The OpenRouter key goes
- * straight to main, which checks it with OpenRouter and keeps it in the OS secret store; it is
+ * Account menu once connected, and the picker's model list under it. A pasted key goes
+ * straight to main, which checks it with its provider and keeps it in the OS secret store; it is
  * never shown again, and the field forgets it the moment it is sent.
  */
 import { type JSX, lazy, Suspense, useState } from "react";
@@ -163,13 +163,48 @@ export function useRecheck(engineId: string, onEnginesRefresh: () => Promise<voi
   return { checking, recheck };
 }
 
-const OPEN_ROUTER_WORDS: ProviderWords = { name: WORDS.openRouter.name, plans: "", guide: WORDS.openRouter.keysUrl };
+/** What a key provider's row says (`METERED_PROVIDER_WORDS.openRouter`, `.opper`). */
+type KeyProviderWords = KeyEntryWords & {
+  name: string;
+  keysUrl: string;
+  notConnectedLine: string;
+  connectedLine: string;
+  refused: string;
+  replace: string;
+  replaceLine: string;
+  remove: string;
+};
 
-/** OpenRouter's Get a key: its keys page in the browser. */
-function getOpenRouterKey(): void {
-  reportSignInHelper(EngineId.OpenRouter, SignInHelper.GetKeyClicked, { surface: ProviderSurface.Settings });
-  void window.studio.openUrl(WORDS.openRouter.keysUrl);
+/** A metered API whose key is pasted here: its engine, its words, and the calls that keep its key. */
+interface KeyProvider {
+  id: EngineId;
+  words: KeyProviderWords;
+  save: (key: string) => Promise<EngineStatus>;
+  clear: () => Promise<EngineStatus>;
 }
+
+const OPEN_ROUTER: KeyProvider = {
+  id: EngineId.OpenRouter,
+  words: WORDS.openRouter,
+  save: (key) => window.studio.openRouterKeySave(key),
+  clear: () => window.studio.openRouterKeyClear(),
+};
+
+const OPPER: KeyProvider = {
+  id: EngineId.Opper,
+  words: WORDS.opper,
+  save: (key) => window.studio.opperKeySave(key),
+  clear: () => window.studio.opperKeyClear(),
+};
+
+/** A key provider's Get a key: its keys page in the browser. */
+function getKey(provider: KeyProvider): void {
+  reportSignInHelper(provider.id, SignInHelper.GetKeyClicked, { surface: ProviderSurface.Settings });
+  void window.studio.openUrl(provider.words.keysUrl);
+}
+
+/** OpenRouter's Get a key, the key field's own when a row names none. */
+const getOpenRouterKey = (): void => getKey(OPEN_ROUTER);
 
 /** The words of a key field: its label and placeholder, and its buttons. */
 export type KeyEntryWords = { keyLabel: string; keyPlaceholder: string; save: string; getKey: string; cancel: string };
@@ -221,8 +256,9 @@ export function KeyEntry({
   );
 }
 
-/** OpenRouter's row by its state: connected, waiting for a key, or unable to check. */
-function openRouterView(
+/** A key provider's row by its state: connected, waiting for a key, or unable to check. */
+function keyProviderView(
+  words: KeyProviderWords,
   status: EngineStatus,
   act: { recheck: (pressed: ProviderAction) => void; replace: () => void; remove: () => void },
 ): RowView {
@@ -230,14 +266,14 @@ function openRouterView(
     return {
       tone: RowTone.Connected,
       status: WORDS.connected,
-      line: WORDS.openRouter.connectedLine,
+      line: words.connectedLine,
       actions: (
-        <AccountMenu name={WORDS.openRouter.name} onCheck={() => act.recheck(ProviderAction.CheckConnection)}>
+        <AccountMenu name={words.name} onCheck={() => act.recheck(ProviderAction.CheckConnection)}>
           <>
             <DropdownMenuItem onSelect={act.replace}>
-              <ItemWords title={WORDS.openRouter.replace} line={WORDS.openRouter.replaceLine} />
+              <ItemWords title={words.replace} line={words.replaceLine} />
             </DropdownMenuItem>
-            <DropdownMenuItem onSelect={act.remove}>{WORDS.openRouter.remove}</DropdownMenuItem>
+            <DropdownMenuItem onSelect={act.remove}>{words.remove}</DropdownMenuItem>
           </>
         </AccountMenu>
       ),
@@ -247,7 +283,7 @@ function openRouterView(
     return {
       tone: RowTone.Off,
       status: WORDS.notConnected,
-      line: WORDS.openRouter.notConnectedLine,
+      line: words.notConnectedLine,
       actions: null,
       face: SubscriptionRowFace.NotConnected,
     };
@@ -260,12 +296,14 @@ function openRouterView(
   };
 }
 
-function OpenRouterRow({
+/** The row of a metered API whose key is pasted here: OpenRouter's or Opper's. */
+function KeyProviderRow({
+  provider,
   engine,
   onEnginesRefresh,
-}: { engine: EngineDescriptor } & Pick<MeteredProviderProps, "onEnginesRefresh">) {
+}: { provider: KeyProvider; engine: EngineDescriptor } & Pick<MeteredProviderProps, "onEnginesRefresh">) {
   const { run, error } = useRun();
-  const { checking, recheck } = useRecheck(EngineId.OpenRouter, onEnginesRefresh);
+  const { checking, recheck } = useRecheck(provider.id, onEnginesRefresh);
   const [replacing, setReplacing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [refused, setRefused] = useState(false);
@@ -275,9 +313,9 @@ function OpenRouterRow({
       setSaving(true);
       const startedAt = reportClock();
       const checked = (code: EngineStatusCode | null) =>
-        reportKeyChecked(EngineId.OpenRouter, ProviderSurface.Settings, code, startedAt);
+        reportKeyChecked(provider.id, ProviderSurface.Settings, code, startedAt);
       try {
-        const status = await window.studio.openRouterKeySave(key).catch((err: unknown) => {
+        const status = await provider.save(key).catch((err: unknown) => {
           checked(null);
           throw err;
         });
@@ -290,34 +328,42 @@ function OpenRouterRow({
         setSaving(false);
       }
     });
-  const removed = (ok: boolean) => reportAccountChanged(EngineId.OpenRouter, AccountAction.KeyRemoved, ok);
-  const view = openRouterView(engine.status, {
+  const removed = (ok: boolean) => reportAccountChanged(provider.id, AccountAction.KeyRemoved, ok);
+  const view = keyProviderView(provider.words, engine.status, {
     recheck: (pressed) => {
-      reportProviderPress(EngineId.OpenRouter, pressed, ProviderSurface.Settings);
+      reportProviderPress(provider.id, pressed, ProviderSurface.Settings);
       void run(recheck);
     },
     replace: () => {
-      reportSignInHelper(EngineId.OpenRouter, SignInHelper.KeyBoxOpened, { surface: ProviderSurface.Settings });
+      reportSignInHelper(provider.id, SignInHelper.KeyBoxOpened, { surface: ProviderSurface.Settings });
       setReplacing(true);
     },
     remove: () =>
       void run(async () => {
-        await settled(() => window.studio.openRouterKeyClear(), removed);
+        await settled(() => provider.clear(), removed);
         await onEnginesRefresh();
       }),
   });
-  useRowViewed(EngineId.OpenRouter, view.face, ProviderSurface.Settings, null);
+  useRowViewed(provider.id, view.face, ProviderSurface.Settings, null);
   const asksForKey = replacing || engine.status.code === EngineStatusCode.NeedsLogin;
   return (
     <ProviderCard
-      words={OPEN_ROUTER_WORDS}
+      words={{ name: provider.words.name, plans: "", guide: provider.words.keysUrl }}
       engine={engine}
       view={view}
       checking={checking}
       connected={ready && !replacing}
-      problem={error ?? (refused ? WORDS.openRouter.refused : null)}
+      problem={error ?? (refused ? provider.words.refused : null)}
     >
-      {asksForKey && <KeyEntry saving={saving} onSave={save} onCancel={replacing ? () => setReplacing(false) : null} />}
+      {asksForKey && (
+        <KeyEntry
+          saving={saving}
+          onSave={save}
+          onCancel={replacing ? () => setReplacing(false) : null}
+          words={provider.words}
+          onGetKey={() => getKey(provider)}
+        />
+      )}
     </ProviderCard>
   );
 }
@@ -328,9 +374,10 @@ export function MeteredProviderRows({ engines, onEnginesRefresh }: MeteredProvid
   const grok = engines.find((engine) => engine.id === EngineId.Grok);
   const cursor = engines.find((engine) => engine.id === EngineId.Cursor);
   const openRouter = engines.find((engine) => engine.id === EngineId.OpenRouter);
+  const opper = engines.find((engine) => engine.id === EngineId.Opper);
   return (
     <>
-      {/* The CLI rows load with Settings; OpenRouter's row below waits for nothing. */}
+      {/* The CLI rows load with Settings; the key rows below wait for nothing. */}
       <Suspense fallback={null}>
         {openCode && (
           <CliSignInRow engine={openCode} onEnginesRefresh={onEnginesRefresh} provider={EngineId.OpenCode} />
@@ -338,7 +385,8 @@ export function MeteredProviderRows({ engines, onEnginesRefresh }: MeteredProvid
         {grok && <CliSignInRow engine={grok} onEnginesRefresh={onEnginesRefresh} provider={EngineId.Grok} />}
         {cursor && <CliSignInRow engine={cursor} onEnginesRefresh={onEnginesRefresh} provider={EngineId.Cursor} />}
       </Suspense>
-      {openRouter && <OpenRouterRow engine={openRouter} onEnginesRefresh={onEnginesRefresh} />}
+      {openRouter && <KeyProviderRow provider={OPEN_ROUTER} engine={openRouter} onEnginesRefresh={onEnginesRefresh} />}
+      {opper && <KeyProviderRow provider={OPPER} engine={opper} onEnginesRefresh={onEnginesRefresh} />}
     </>
   );
 }

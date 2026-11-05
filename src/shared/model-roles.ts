@@ -72,6 +72,7 @@ const SESSION_ENGINES: readonly string[] = [
   EngineId.Bonsai,
   EngineId.OpenCode,
   EngineId.OpenRouter,
+  EngineId.Opper,
   EngineId.LocalServer,
   EngineId.Grok,
   EngineId.Cursor,

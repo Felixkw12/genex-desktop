@@ -288,6 +288,8 @@ export default {
   "Add to": "Добавить в",
   "Add your OpenRouter API key in Settings › Model Providers.":
     "Добавь свой API-ключ OpenRouter в разделе «Настройки › Провайдеры моделей».",
+  "Add your Opper API key in Settings › Model Providers.":
+    "Добавь свой API-ключ Opper в разделе «Настройки › Провайдеры моделей».",
   "Add {title} to this game": "Добавить «{title}» в эту игру",
   Added: "Добавлено",
   "Added a {shape}": "Добавлено: {shape}",
@@ -494,6 +496,7 @@ export default {
   "Billed to your OpenRouter credits.": "Оплата из твоих кредитов OpenRouter.",
   "Billed to your OpenRouter credits. Pick any of its models in the model menu.":
     "Оплата из твоих кредитов OpenRouter. Выбирай любую его модель в меню моделей.",
+  "Billed to your Opper credits": "Оплата кредитами Opper",
   "Black point": "Точка чёрного",
   Blades: "Клинки",
   "Blender assets": "Ассеты Blender",
@@ -2292,6 +2295,7 @@ export default {
   "No Godot project in this game's folder yet.": "В папке этой игры пока нет проекта Godot.",
   "No MCP servers match your search.": "По запросу нет MCP-серверов.",
   "No OpenRouter API key is saved.": "API-ключ OpenRouter не сохранён.",
+  "No Opper API key is saved.": "API-ключ Opper не сохранён.",
   "No [mcp_servers.<name>] sections found in that snippet.": "В этом фрагменте нет разделов [mcp_servers.<name>].",
   "No active sign-in link. Start sign-in again.": "Нет активной ссылки для входа. Начни вход заново.",
   "No app on this Mac opens {file}, so it’s shown in Finder.":
@@ -2643,6 +2647,16 @@ export default {
   "Opens the folder": "Откроет папку",
   "Opens the release page": "Открывает страницу релиза",
   "Opens your browser. You’ll come back here to pay.": "Откроется браузер. Потом вернёшься сюда, чтобы оплатить.",
+  "Opper API key": "API-ключ Opper",
+  "Opper API key saved": "API-ключ Opper сохранён",
+  "Opper could not be reached ({detail}).": "Не удалось связаться с Opper ({detail}).",
+  "Opper did not accept the saved API key.": "Opper не принял сохранённый API-ключ.",
+  "Opper didn't accept that key. Check it and paste it again.":
+    "Opper не принял этот ключ. Проверь его и вставь снова.",
+  "Opper is unavailable": "Opper недоступен",
+  "Opper's model list could not be read.": "Не удалось прочитать список моделей Opper.",
+  "Opper's model list failed (HTTP {status}).": "Не удалось загрузить список моделей Opper (HTTP {status}).",
+  "Opper's model list was larger than expected.": "Список моделей Opper оказался больше, чем ожидалось.",
   Optic: "Оптика",
   "Or in Studio: {clicks}.": "Или в Studio: {clicks}.",
   "Otherwise every game can use it.": "Иначе его смогут использовать все игры.",
@@ -2669,6 +2683,8 @@ export default {
   "Paste a server configuration": "Вставь конфигурацию сервера",
   "Paste an API key. Requests are billed to your OpenRouter credits.":
     "Вставь API-ключ. Запросы оплачиваются твоими кредитами OpenRouter.",
+  "Paste an API key. Requests are billed to your Opper credits.":
+    "Вставь API-ключ. Запросы оплачиваются твоими кредитами Opper.",
   "Paste and Match Style": "Вставить и согласовать стиль",
   "Paste the JSON, command or URL from the server's install page to fill this in.":
     "Вставь JSON, команду или URL со страницы установки сервера — и поля заполнятся сами.",
@@ -3638,6 +3654,8 @@ export default {
   "That didn't work, and nothing was changed.": "Не получилось, ничего не изменено.",
   "That does not look like an OpenRouter API key. Paste the whole key, with no spaces.":
     "Это не похоже на API-ключ OpenRouter. Вставь ключ целиком, без пробелов.",
+  "That does not look like an Opper API key. Paste the whole key, with no spaces.":
+    "Это не похоже на API-ключ Opper. Вставь ключ целиком, без пробелов.",
   "That doesn't look like a key. Paste the whole key, with no spaces.":
     "Это не похоже на ключ. Вставь ключ целиком, без пробелов.",
   "That doesn't look like the code from the sign-in page. Copy it again.":
@@ -3695,6 +3713,8 @@ export default {
   "The Loop's work is kept in your project.": "Работа Loop сохранена в твоём проекте.",
   "The OS secret store is locked, so the OpenRouter key cannot be read. {detail}":
     "Системное хранилище секретов заблокировано, поэтому ключ OpenRouter не прочитать. {detail}",
+  "The OS secret store is locked, so the Opper key cannot be read. {detail}":
+    "Системное хранилище секретов заблокировано, поэтому ключ Opper не прочитать. {detail}",
   "The OS secret store is locked, so the server's API key cannot be read. {detail}":
     "Системное хранилище секретов заблокировано, поэтому API-ключ сервера не прочитать. {detail}",
   "The Ollama library answered {status}.": "Библиотека Ollama ответила {status}.",

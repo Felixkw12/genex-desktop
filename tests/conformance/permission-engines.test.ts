@@ -40,6 +40,8 @@ describe("the modes each engine honours", () => {
       grok: ["auto", "plan", "bypassPermissions"],
       "a-new-engine": ["auto"],
     });
+    // Opper's tools run in the same loop as OpenRouter's.
+    assert.deepEqual(permissionModesFor("opper"), ["auto", "default", "acceptEdits", "plan"]);
     // An inherited property name is no engine of its own.
     assert.deepEqual(permissionModesFor("constructor"), ["auto"]);
   });
@@ -51,6 +53,7 @@ describe("the modes each engine honours", () => {
     assert.deepEqual(runs("bonsai"), ["auto", "default", "acceptEdits", "plan", "auto"]);
     assert.deepEqual(runs("ollama"), ["auto", "auto", "auto", "auto", "auto"]);
     assert.deepEqual(runs("openrouter"), ["auto", "default", "acceptEdits", "plan", "auto"]);
+    assert.deepEqual(runs("opper"), ["auto", "default", "acceptEdits", "plan", "auto"]);
     assert.deepEqual(runs("opencode"), ["auto", "auto", "auto", "plan", "auto"]);
     assert.deepEqual(runs("grok"), ["auto", "auto", "auto", "plan", "bypassPermissions"]);
   });
@@ -62,6 +65,7 @@ describe("the modes each engine honours", () => {
     assert.deepEqual(reasons("bonsai"), [null, null, null, null, "always_sandboxed"]);
     assert.deepEqual(reasons("ollama"), [null, "cannot_ask", "cannot_ask", "cannot_ask", "cannot_ask"]);
     assert.deepEqual(reasons("openrouter"), [null, null, null, null, "always_sandboxed"]);
+    assert.deepEqual(reasons("opper"), [null, null, null, null, "always_sandboxed"]);
     assert.deepEqual(reasons("opencode"), [null, "cannot_ask", "cannot_ask", null, "cannot_ask"]);
     assert.deepEqual(reasons("grok"), [null, "cannot_ask", "cannot_ask", null, null]);
   });

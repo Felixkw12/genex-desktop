@@ -152,6 +152,7 @@ const BUILDS_WITH: readonly string[] = [
   EngineId.Codex,
   EngineId.LocalServer,
   EngineId.OpenRouter,
+  EngineId.Opper,
   EngineId.Grok,
   EngineId.Cursor,
 ];

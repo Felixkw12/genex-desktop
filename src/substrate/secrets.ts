@@ -8,7 +8,7 @@
  *
  * There is deliberately little to keep here. Subscriptions never produce a token we hold: Claude
  * Code and Codex manage their own credentials in their own config homes, as OpenCode does. The API
- * keys the studio keeps are OpenRouter's and a local server's, pasted in Settings
+ * keys the studio keeps are OpenRouter's, Opper's and a local server's, pasted in Settings
  * (`provider-keys.ts`), beside the MCP connectors' secrets.
  */
 import path from "node:path";

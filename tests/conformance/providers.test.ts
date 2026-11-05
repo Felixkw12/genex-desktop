@@ -80,6 +80,7 @@ describe("provider table", () => {
     assert.equal(loginKind("opencode"), "cli", "OpenCode runs its own sign-in in the terminal");
     assert.equal(loginKind("grok"), "cli", "Grok Build runs its own `grok login` in the terminal");
     assert.equal(loginKind("openrouter"), "none", "OpenRouter's key is pasted in Settings");
+    assert.equal(loginKind("opper"), "none", "Opper's key is pasted in Settings");
     assert.equal(loginKind("local-server"), "none", "a local server's address and key are typed in Settings");
     assert.equal(loginKind("gemini-cli"), "none");
     assert.equal(providerInfo("gemini-cli"), undefined);
@@ -106,6 +107,8 @@ describe("provider table", () => {
       // like OpenCode, it is never picked on the person's behalf.
       grok: "metered",
       openrouter: "metered",
+      // Flipped (Opper): an API billed per token, like OpenRouter.
+      opper: "metered",
       // Flipped (a local server): a server the person runs is local, never metered.
       "local-server": "local",
       // Flipped (Cursor): third-party models in Cursor, and Cursor's own past the plan's pool, are paid
@@ -114,7 +117,8 @@ describe("provider table", () => {
       // Genex bills the person's Genex credits per call: only their own pick runs on it.
       genex: "metered",
     });
-    for (const id of ["openrouter", "opencode", "grok", "cursor", "genex"]) assert.equal(isMetered(id), true, id);
+    for (const id of ["openrouter", "opper", "opencode", "grok", "cursor", "genex"])
+      assert.equal(isMetered(id), true, id);
     for (const id of ["bonsai", "ollama", "local-server"]) assert.equal(isLocalEngine(id), true, id);
     for (const id of ["claude-code", "codex", "gemini-cli", "constructor", null, undefined]) {
       assert.equal(isMetered(id), false, String(id));
@@ -124,10 +128,11 @@ describe("provider table", () => {
       assert.equal(provider.billing === "subscription", provider.subscription, provider.id);
   });
 
-  it("names the providers that ship in beta: Cursor, until a live test proves it", () => {
+  it("names the providers that ship in beta: Cursor and Opper, until a live test proves them", () => {
     assert.deepEqual(
       PROVIDERS.filter((provider) => isBeta(provider.id)).map((provider) => provider.id),
-      ["cursor"],
+      // Flipped (Opper): shipped before a live test, so it says Beta too.
+      ["cursor", "opper"],
     );
     for (const id of ["gemini-cli", "constructor", null, undefined]) assert.equal(isBeta(id), false, String(id));
   });

@@ -1120,6 +1120,55 @@ it("the OpenRouter key is saved and forgotten through the engine, and only its s
   }
 });
 
+it("the Opper key is saved and forgotten through the engine, and only its status comes back", async () => {
+  const { EngineRegistry } = await import("../../src/substrate/engines/registry.ts");
+  const { OpperEngine } = await import("../../src/substrate/engines/opper.ts");
+  const { memoryKeyStore } = await import("../../src/substrate/provider-keys.ts");
+  const { tmpDir } = await import("../helpers/tmp.ts");
+  const { startFakeOpper, GOOD_KEY } = await import("../helpers/fake-opper.ts");
+  const server = await startFakeOpper();
+  try {
+    const keys = memoryKeyStore(null);
+    const engines = new EngineRegistry();
+    engines.register(new OpperEngine({ root: await tmpDir("ipc-opper-"), keys, baseUrl: server.baseUrl }));
+    const events: UiEvent[] = [];
+    const { handle, invoke } = registrar();
+    registerModelsIpc(handle, {
+      core: { engines, fastDecisions: noFastDecisions },
+      subscription: () => null,
+      usage: noUsage,
+      pushUiEvent: (event) => events.push(event),
+      openRouterLogin: noSignIn,
+    });
+    // Hostile payloads: nothing is kept, and no answer ever carries a key.
+    for (const payload of [
+      undefined,
+      null,
+      {},
+      { key: 7 },
+      { key: "" },
+      { key: `${GOOD_KEY}\nX: 1` },
+      { key: "x".repeat(5000) },
+    ]) {
+      const answer = await invoke("studio:opper.key.save", payload);
+      assert.equal(answer.ok && statusCode(answer.value), "needs_login", JSON.stringify(payload)?.slice(0, 40));
+      assert.equal(await keys.read(), null);
+    }
+    const saved = await invoke("studio:opper.key.save", { key: GOOD_KEY });
+    assert.equal(saved.ok && statusCode(saved.value), "ready");
+    assert.doesNotMatch(JSON.stringify(saved), /0123456789abcdef/);
+    assert.equal(await keys.read(), GOOD_KEY);
+    const cleared = await invoke("studio:opper.key.clear");
+    assert.equal(cleared.ok && statusCode(cleared.value), "needs_login");
+    assert.equal(await keys.read(), null);
+    assert.ok(events.every((event) => event.type === "engines.changed"));
+    assert.deepEqual(events.at(-1), { type: "engines.changed", payload: { engine: "opper" } }, "the change is Opper's");
+    assert.equal(events.length, 9);
+  } finally {
+    await server.close();
+  }
+});
+
 it("the browser sign-in hands its key to the engine, and only how it ended comes back", async () => {
   const { EngineRegistry } = await import("../../src/substrate/engines/registry.ts");
   const { OpenRouterEngine } = await import("../../src/substrate/engines/openrouter.ts");

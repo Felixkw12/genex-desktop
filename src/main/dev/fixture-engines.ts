@@ -1,7 +1,7 @@
 /**
  * The scripted engines of a fixture session: Ollama, Claude Code, Codex, OpenCode, Grok Build, Cursor,
- * Genex, OpenRouter and local server stand-ins that answer from fixed text, never reach an account, a key, a server or the
- * network, and start no vendor worker. Markers in
+ * Genex, OpenRouter, Opper and local server stand-ins that answer from fixed text, never reach an
+ * account, a key, a server or the network, and start no vendor worker. Markers in
  * the user's words (`fixture:pending`, `fixture:stream`, `fixture:plan`, …) choose the script.
  */
 import { ChatActivityPhase } from "../../shared/chat-activity.ts";
@@ -40,10 +40,16 @@ const FIXTURE_ENGINES = [
   EngineId.Cursor,
   EngineId.Genex,
   EngineId.OpenRouter,
+  EngineId.Opper,
   EngineId.LocalServer,
 ] as const;
-/** The fixture engines the studio's own loop drives: the local model, OpenRouter's API and a local server. */
-const DIRECT_FIXTURES: ReadonlySet<string> = new Set([EngineId.Ollama, EngineId.OpenRouter, EngineId.LocalServer]);
+/** The fixture engines the studio's own loop drives: the local model, OpenRouter's and Opper's APIs, a local server. */
+const DIRECT_FIXTURES: ReadonlySet<string> = new Set([
+  EngineId.Ollama,
+  EngineId.OpenRouter,
+  EngineId.Opper,
+  EngineId.LocalServer,
+]);
 const READY_STATUS: EngineStatus = { code: EngineStatusCode.Ready, detail: "AG-933 fixture; no account or network" };
 /** No local server is connected in a fixture session, so the picker's lists stay as they were. */
 const NO_LOCAL_SERVER: EngineStatus = {
@@ -58,13 +64,17 @@ const FIXTURE_SERVER: LocalServerInfo = {
 };
 /** Cursor's CLI is not on a fixture session's computer, so the picker's lists stay as they were. */
 const NO_CURSOR: EngineStatus = { code: EngineStatusCode.NotInstalled, detail: "AG-933 fixture; no Cursor CLI" };
+/** No Opper key is saved in a fixture session, so the picker's lists stay as they were. */
+const NO_OPPER_KEY: EngineStatus = { code: EngineStatusCode.NeedsLogin, detail: "AG-933 fixture; no Opper key" };
 /**
  * The status each fixture starts with when the session names none: ready, but for the local server,
- * Cursor and Genex, whose account is signed out until `STUDIO_FIXTURE_USAGE_FILE` says otherwise.
+ * Cursor, Opper (no key) and Genex, whose account is signed out until `STUDIO_FIXTURE_USAGE_FILE`
+ * says otherwise.
  */
 const DEFAULT_STATUS: Partial<Record<string, EngineStatus>> = {
   [EngineId.LocalServer]: NO_LOCAL_SERVER,
   [EngineId.Cursor]: NO_CURSOR,
+  [EngineId.Opper]: NO_OPPER_KEY,
   [EngineId.Genex]: genexStatus(GenexAccess.SignIn),
 };
 /**
@@ -146,7 +156,7 @@ const COMMAND_SESSION = "fixture-command-v1";
 
 /**
  * First launch: an empty library, Claude Code waiting for a sign-in, Codex, OpenCode, Grok Build and
- * Cursor not installed, OpenRouter with no key, and no local server.
+ * Cursor not installed, OpenRouter and Opper with no key, and no local server.
  */
 export const FIRST_LAUNCH_STATUS: Record<string, EngineStatus> = {
   [EngineId.ClaudeCode]: {
@@ -158,6 +168,7 @@ export const FIRST_LAUNCH_STATUS: Record<string, EngineStatus> = {
   [EngineId.Grok]: { code: EngineStatusCode.NotInstalled, detail: "AG-933 fixture; no Grok Build CLI" },
   [EngineId.Cursor]: NO_CURSOR,
   [EngineId.OpenRouter]: { code: EngineStatusCode.NeedsLogin, detail: "AG-933 fixture; no OpenRouter key" },
+  [EngineId.Opper]: NO_OPPER_KEY,
   [EngineId.LocalServer]: NO_LOCAL_SERVER,
 };
 
@@ -174,7 +185,7 @@ function fixtureEngine(
   pendingSessions: Set<string>,
 ): Engine {
   const direct = DIRECT_FIXTURES.has(id);
-  // Ollama completes one turn at a time; OpenRouter and a local server hold Genex sessions, as the real ones do.
+  // Ollama completes one turn at a time; OpenRouter, Opper and a local server hold Genex sessions, as the real ones do.
   const local = id === EngineId.Ollama;
   return {
     id,

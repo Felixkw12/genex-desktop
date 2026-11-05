@@ -519,7 +519,7 @@ thread keeps the mode the person picked, so a chat moved back to Claude Code fin
 | Engine | Modes | How |
 | --- | --- | --- |
 | Claude Code | all five | asks mid-turn ([The session](#the-session)) |
-| Bonsai, OpenRouter, Local server | Auto, Manual, Accept edits, Plan | the studio runs its tools and asks before each change; Auto has each command checked by the session's own model |
+| Bonsai, OpenRouter, Opper, Local server | Auto, Manual, Accept edits, Plan | the studio runs its tools and asks before each change; Auto has each command checked by the session's own model |
 | Codex | Auto, Plan, Bypass | Auto runs on Codex's app server, asking before what its sandbox would not run, each ask checked by the session's own model; Plan and Bypass keep `codex exec`, which cannot ask |
 | OpenCode | Auto, Plan | `opencode run` cannot ask mid-turn and always runs in the studio's sandbox |
 | Grok Build | Auto, Plan, Bypass | `grok -p` cannot ask mid-turn: Auto runs it in the studio's sandbox, Bypass as the person outside it, as Codex's; Plan reads from a folder of its own |

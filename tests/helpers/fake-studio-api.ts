@@ -137,6 +137,8 @@ const METHODS = [
   "openRouterSignIn",
   "openRouterSignInReopen",
   "openRouterSignInCancel",
+  "opperKeySave",
+  "opperKeyClear",
   "localServerConnect",
   "localServerForget",
   "localServerFind",

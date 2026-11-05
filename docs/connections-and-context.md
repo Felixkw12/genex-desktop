@@ -223,6 +223,27 @@ signed in the picker starts OpenCode's GPT models with the ones Codex lists (`ru
 `renderer/model-lineup.ts`). Recorded streams and listings: `tests/fixtures/transcripts/opencode-*`
 (OpenCode 1.18 and 2.0.20).
 
+## Opper
+
+**Opper** ([opper.ts](../src/substrate/engines/opper.ts)) is a European AI gateway: one API key for
+hundreds of models. It is built as OpenRouter is: a direct, metered engine on the pi-ai path whose
+game chats and builds run as Genex sessions (`LocalSessions`, under Opper's own id), so the app never
+picks it on its own. It ships as Beta (`beta` in `shared/providers.ts`) until a live test proves it.
+Settings sends a pasted key over `studio:opper.key.save` (native); main checks it with `GET /v3/me`,
+which spends nothing, keeps it only when accepted (`opper-api-key` in the same SecretStore as
+OpenRouter's) and answers with the engine status, never the key. There is no browser sign-in and no
+first-launch screen: the key is pasted in Settings → Model Providers. Completions go to the
+OpenAI-compatible `https://api.opper.ai/v3/compat` with the system prompt in the system role and
+`reasoning_effort` as the dial. Opper lists models only to a key, so with no key the catalog is
+empty; with one, `GET /v3/compat/models?view=simplified` lists each model once (a bare pool name
+such as `claude-sonnet-4-6` when several providers serve it), and only language models that call
+tools and answer in text are kept, with their context, reply cap, vision, reasoning efforts and
+price. Routing graphs (`dynamic/<name>`) are left out: they price nothing ahead. Like OpenRouter's,
+the picker shows the catalog's first three, Opper picks no default model, context is estimated from
+characters before each request, the HTTP status decides the failure kind, and errors are redacted
+before they are logged. Tests: `tests/conformance/engine-opper.test.ts` against a local fake
+(`tests/helpers/fake-opper.ts`).
+
 ## Grok Build
 
 **Grok Build** ([grok.ts](../src/substrate/engines/grok.ts)) is xAI's coding CLI (`grok`) as a

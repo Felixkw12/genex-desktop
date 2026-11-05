@@ -75,6 +75,7 @@ describe("engines", () => {
       // Flipped (OpenCode, OpenRouter, a local server, Grok Build): the metered providers follow the
       // local ones, and a server the person runs comes last. Flipped (Cursor): a metered one, after Grok Build.
       // Flipped (Genex): Claude Code on Genex credits, metered, after Cursor.
+      // Flipped (Opper): a metered API whose key is pasted in Settings, after OpenRouter.
       [
         EngineId.ClaudeCode,
         EngineId.Codex,
@@ -85,6 +86,7 @@ describe("engines", () => {
         EngineId.Cursor,
         EngineId.Genex,
         EngineId.OpenRouter,
+        EngineId.Opper,
         EngineId.LocalServer,
       ],
     );

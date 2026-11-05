@@ -247,6 +247,7 @@ export default {
   "Add to": "添加到",
   "Add your OpenRouter API key in Settings › Model Providers.":
     "请在“设置 › 模型提供方”中添加你的 OpenRouter API 密钥。",
+  "Add your Opper API key in Settings › Model Providers.": "请在“设置 › 模型提供方”中添加你的 Opper API 密钥。",
   "Add {title} to this game": "将 {title} 添加到此游戏",
   Added: "已添加",
   "Added a {shape}": "已添加 {shape}",
@@ -447,6 +448,7 @@ export default {
   "Billed to your OpenRouter credits.": "从你的 OpenRouter 积分中扣费。",
   "Billed to your OpenRouter credits. Pick any of its models in the model menu.":
     "从你的 OpenRouter 积分中扣费。可在模型菜单中选择它的任意模型。",
+  "Billed to your Opper credits": "从你的 Opper 积分中扣费",
   "Black point": "黑场",
   Blades: "刀锋",
   "Blender assets": "Blender 素材",
@@ -2158,6 +2160,7 @@ export default {
   "No Godot project in this game's folder yet.": "此游戏的文件夹中还没有 Godot 项目。",
   "No MCP servers match your search.": "没有与搜索匹配的 MCP 服务器。",
   "No OpenRouter API key is saved.": "尚未保存 OpenRouter API 密钥。",
+  "No Opper API key is saved.": "尚未保存 Opper API 密钥。",
   "No [mcp_servers.<name>] sections found in that snippet.": "该片段中未找到 [mcp_servers.<name>] 部分。",
   "No active sign-in link. Start sign-in again.": "没有有效的登录链接。请重新登录。",
   "No app on this Mac opens {file}, so it’s shown in Finder.":
@@ -2493,6 +2496,15 @@ export default {
   "Opens the folder": "打开文件夹",
   "Opens the release page": "打开发布页面",
   "Opens your browser. You’ll come back here to pay.": "将打开你的浏览器。之后回到这里支付。",
+  "Opper API key": "Opper API 密钥",
+  "Opper API key saved": "已保存 Opper API 密钥",
+  "Opper could not be reached ({detail}).": "无法连接 Opper（{detail}）。",
+  "Opper did not accept the saved API key.": "Opper 未接受已保存的 API 密钥。",
+  "Opper didn't accept that key. Check it and paste it again.": "Opper 没有接受这个密钥。请检查后重新粘贴。",
+  "Opper is unavailable": "Opper 不可用",
+  "Opper's model list could not be read.": "无法读取 Opper 的模型列表。",
+  "Opper's model list failed (HTTP {status}).": "获取 Opper 模型列表失败（HTTP {status}）。",
+  "Opper's model list was larger than expected.": "Opper 的模型列表超出预期大小。",
   Optic: "光学",
   "Or in Studio: {clicks}.": "或在 Studio 中：{clicks}。",
   "Otherwise every game can use it.": "否则所有游戏都能使用它。",
@@ -2518,6 +2530,7 @@ export default {
   "Paste a server configuration": "粘贴服务器配置",
   "Paste an API key. Requests are billed to your OpenRouter credits.":
     "粘贴 API 密钥。请求费用从你的 OpenRouter 积分中扣除。",
+  "Paste an API key. Requests are billed to your Opper credits.": "粘贴 API 密钥。请求费用从你的 Opper 积分中扣除。",
   "Paste and Match Style": "粘贴并匹配样式",
   "Paste the JSON, command or URL from the server's install page to fill this in.":
     "粘贴服务器安装页上的 JSON、命令或 URL，即可自动填写。",
@@ -3456,6 +3469,8 @@ export default {
   "That didn't work, and nothing was changed.": "没有成功，也没有做任何更改。",
   "That does not look like an OpenRouter API key. Paste the whole key, with no spaces.":
     "这看起来不像 OpenRouter API 密钥。请完整粘贴密钥，不要带空格。",
+  "That does not look like an Opper API key. Paste the whole key, with no spaces.":
+    "这看起来不像 Opper API 密钥。请完整粘贴密钥，不要带空格。",
   "That doesn't look like a key. Paste the whole key, with no spaces.":
     "这看起来不像密钥。请粘贴完整的密钥，不要带空格。",
   "That doesn't look like the code from the sign-in page. Copy it again.":
@@ -3510,6 +3525,8 @@ export default {
   "The Loop's work is kept in your project.": "Loop 的工作已保留在你的项目中。",
   "The OS secret store is locked, so the OpenRouter key cannot be read. {detail}":
     "系统密钥存储已锁定，无法读取 OpenRouter 密钥。{detail}",
+  "The OS secret store is locked, so the Opper key cannot be read. {detail}":
+    "系统密钥存储已锁定，无法读取 Opper 密钥。{detail}",
   "The OS secret store is locked, so the server's API key cannot be read. {detail}":
     "系统密钥存储已锁定，无法读取服务器的 API 密钥。{detail}",
   "The Ollama library answered {status}.": "Ollama 库返回了 {status}。",

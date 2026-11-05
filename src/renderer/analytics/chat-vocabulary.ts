@@ -70,7 +70,7 @@ export type RetryAfterBucket = (typeof RetryAfterBucket)[keyof typeof RetryAfter
 
 /** An engine as analytics names it: one of the app's engine ids, else other; none when there is none. */
 export const EngineRefOther = { Other: "other", None: "none" } as const;
-/** A model as analytics names it: a catalog id of a subscription or OpenRouter, else one of these. */
+/** A model as analytics names it: a catalog id of a subscription, OpenRouter or Opper, else one of these. */
 export const ModelRefOther = { Custom: "custom", Default: "default", None: "none" } as const;
 
 /** An effort as analytics names it when it is not one of the app's levels: the model's own default. */

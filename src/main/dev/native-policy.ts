@@ -55,6 +55,10 @@ const NATIVE_CHANNELS = [
   // redeems the code with OpenRouter; opening its page again is the browser too.
   "studio:openrouter.signin",
   "studio:openrouter.signin.reopen",
+  // Saving checks the key with Opper and writes it to the OS secret store; forgetting it deletes it
+  // there. A fixture profile has no key and no network.
+  "studio:opper.key.save",
+  "studio:opper.key.clear",
   // Connecting asks the person's own model server on this computer or the local network, and keeps
   // its key in the OS secret store; finding one asks this computer's usual ports. A fixture
   // profile reaches no server.

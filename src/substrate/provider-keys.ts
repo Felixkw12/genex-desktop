@@ -1,6 +1,6 @@
 /**
- * The API keys a person pastes into Settings (OpenRouter's, their own model server's and TypeSafe's), one secret each in
- * the OS secret store under `userData/secrets/providers/` — a folder no agent process may read
+ * The API keys a person pastes into Settings (OpenRouter's, Opper's, their own model server's and TypeSafe's), one
+ * secret each in the OS secret store under `userData/secrets/providers/` — a folder no agent process may read
  * (`StudioCore#protectedPaths`). The key is read in main when a request is sent and never crosses
  * to the renderer, the harness, a model tool or a log.
  */
@@ -8,6 +8,8 @@ import { SecretStore } from "./secrets.ts";
 
 /** The secret OpenRouter's key is kept under. Stored on disk: never rename it. */
 export const OPENROUTER_KEY_SECRET = "openrouter-api-key";
+/** The secret Opper's key is kept under. Stored on disk: never rename it. */
+export const OPPER_KEY_SECRET = "opper-api-key";
 /** The secret a local server's API key is kept under. Stored on disk: never rename it. */
 export const LOCAL_SERVER_KEY_SECRET = "local-server-api-key";
 /** The secret TypeSafe's key (the fast decision model a play's pilot may ask) is kept under. Stored on disk: never rename it. */

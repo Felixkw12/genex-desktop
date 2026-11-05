@@ -445,6 +445,8 @@ function accountCalls(bridge: BridgeCalls) {
     openRouterSignIn: () => invoke("studio:openrouter.signin"),
     openRouterSignInReopen: () => invoke("studio:openrouter.signin.reopen"),
     openRouterSignInCancel: () => invoke("studio:openrouter.signin.cancel"),
+    opperKeySave: (key) => invoke("studio:opper.key.save", { key }),
+    opperKeyClear: () => invoke("studio:opper.key.clear"),
     localServerConnect: (url, key) => invoke("studio:local-server.connect", key ? { url, key } : { url }),
     localServerForget: () => invoke("studio:local-server.forget"),
     localServerFind: () => invoke("studio:local-server.find"),
